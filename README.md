@@ -1,4 +1,4 @@
-LPLAY
+SpellPLAY
 
 MVP:
 A lone spellcaster is the only defense to the attacking enemies.  Vulnerable, he has to stand behind village walls on the ramparts
@@ -9,6 +9,10 @@ Spellcasater has a projectile attack, that cost mana.  Mana replenishes over tim
 Enemies spawn and approach the village wall that he has to defend. They have dynamite, so if they touch the wall they will immediately damage. They run in a straight line and span randomly, at increasing difficulty
 Three touches and village wall falls and games over.  Play wins by defending against enemies in a 2 minute round.
 
+
+
+---------------------------------------------------------------------------------------------------------------------
+---LEFT SIDE IS GAME RIGHT SIDE IS OPENING MENU
 ---------------------------------------------------------------------------------------------------------------------
 	
 --------------enemies------------									SPELLPLAY

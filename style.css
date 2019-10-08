@@ -1,0 +1,41 @@
+#background {
+	background-image: url('https://i.imgur.com/gf2pxj6.jpg');
+	height: 800px;
+	width: 1200px;
+}
+
+#hero {
+	background-image: url('https://i.imgur.com/xlpXrA4.png?2');
+		height: 50px;
+		width: 50px;
+		position: absolute;
+		top: 700px;
+		left: 500px;
+
+}
+
+.enemies {
+	background-image: url('https://i.imgur.com/8Z5BQR4.png?3');
+		height: 50px;
+		width: 50px;
+		left: 200px;
+		position: absolute;
+
+
+
+}
+
+#frostbolt {
+	height: 800px;
+	width: 1200px;
+	position: absolute;
+
+}
+
+.frostbolt {
+	background-image: url('https://i.imgur.com/w1ZOEQe.jpg?2');
+		height: 30px;
+		width: 42px;
+		position: absolute;
+
+}
