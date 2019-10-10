@@ -3,18 +3,16 @@
 
 // }
 
-
+//20 x 67
 
 //save imgaes into folder
 //movement tends to the left
 //round timers (each round enemies get tougher)
 //reset hero, reset clocks
+//clear keys after round
 
 
 //record shots made in relation to shots hit - 3 points for a kill -1 point for a cast
-
-
-
 
 
 let keys = [];
@@ -22,7 +20,7 @@ let keys = [];
 let allowshoot = true;
 
 let hero = {
-	top: 800,
+	top: 790,
 	left: 500
 };
 
@@ -36,6 +34,8 @@ let gameToggle = null;
 let interval = null;
 let enemiesInterval = null;
 
+let i = 20;
+let y = 1;
 
 $('button').on('click', () => {
 
@@ -71,28 +71,52 @@ $('button').on('click', () => {
 let roundTimerInterval;
 
 function setTimer(){
-  	var i = 15;
-  	var y = 1;
 
     roundTimerInterval = setInterval(function () {
-        $("#timer").html('Timer: ' + i);
-        $("#round").html('Round: ' + y);
-        if (i < 0) {
-        	alert('You have defeated the first wave. Get ready, The Goblin Commander has allocated new soldiers to overcome your!');
-        	y++;
-        	$("#round").html('Round: ' + y)
-        	i = 15;
-        	for (let foes = 0; foes < enemies.length;) {
-				enemies.pop();}
-			for (let frost = 0; frost < frostbolts.length;) {
-    			frostbolts.pop();}
-    			if (y === 2) {
+        $("#timer").html(i);
+        $("#round").html('Wave ' + y);
 
-    			}
+     //   for (let fullGame = 0; fullGame >=5; fullGame++) {
+	        if (i <= 0) { 
+	       		clearInterval(enemiesInterval);
+	       		if (enemies.length === 0) {	//frostbolts.length === 0
+		        	y++;
+		        	if (y===5) {
+		        		clearScreen();
+						alert('YOU HAVE VANQUISHED THE ENEMY SCOUT FORCES! YOUR ARMY HAS ARRIVED TO REINFORCE THE CHOKE POINT BEFORE THE GOBLIN ARMY. PURCHASE EXPANTION PACK FOR NEW SPELLS AND ENEMIES!');
+						$('button').css('visibility', 'visible')
+		        	} else
+			        	alert('You have defeated the wave of goblins! Get ready, The Goblin Commander has allocated new soldiers to overcome your!');
+			        	$("#round").html('Round: ' + y)
+			        	i = 20;
+			        	endKeyHandler();
+			        	startKeyHandler();
+			        	//clearInterval(roundTimerInterval);
+			        	for (let foes = 0; foes < enemies.length;) {
+							enemies.pop();}
+						for (let frost = 0; frost < frostbolts.length;) {
+			    			frostbolts.pop();}
+			    		enemiesInterval = setInterval(()=>
+							{
+								spawnNewEnemy();
+							}, 900);
+			    // 			interval = setInterval(()=>
+							// {
+							// 	//console.log("gameLoop called");
+							// 	moveFrostbolts();
+							// 	drawFrostbolts();
+							// 	drawEnemies();
+							// 	checkKeys();
+							// 	collisionDet();
+							// }, 10);
 
-        } else i--;
-    }, 1000);
-};
+		    	}
+		    }else {
+		   			i--;
+				}
+	}, 1000);
+}
+
 
 
 
@@ -166,35 +190,117 @@ function moveHero() {
 
 function drawEnemies() {
 
- 	document.getElementById('enemies').innerHTML = "";
- 	for (let i = 0; i < enemies.length; i++) {
-		let ranDistance = Math.floor(Math.random() * 10) - 5; //random integer -5 to 5
-		 enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
+	if (y===1){
+	 	document.getElementById('enemies').innerHTML = "";
+	 	for (let i = 0; i < enemies.length; i++) {
+			// let ranDistance = Math.floor(Math.random() * 10) - 5; //random integer -5 to 5
+			//  enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
 
-		 enemies[i].top = enemies[i].top + 1;
-		 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
-		 if (enemies[i].left < 0) {enemies[i].left = 0;}
-		 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
-		 document.getElementById('enemies').innerHTML += 
-		 `<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+			 enemies[i].top = enemies[i].top + 1;
+			 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
+			 if (enemies[i].left < 0) {enemies[i].left = 0;}
+			 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
+			 document.getElementById('enemies').innerHTML += 
+			 `<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
 
-	}
-	//remove all the enemies that are flagged for removal
-	for (let i = 0; i < enemies.length; i++)
-	{
-		if (enemies[i].top === -100)
-		{
-			enemies.splice(i, 1);
-			i--;
-			clearScreen();
-			alert('Game over. You have been overwhelmed!');
-			$('button').css('visibility', 'visible')
-			
-			
-			//document.getElementById('frostbolts').innerHTML = "";
 		}
-	}
+		//remove all the enemies that are flagged for removal
+		for (let i = 0; i < enemies.length; i++){
+			if (enemies[i].top === -100){
+				enemies.splice(i, 1);
+				i--;
+				clearScreen();
+				alert('Game over. You have been overwhelmed!');
+				$('button').css('visibility', 'visible')
+				
+				
+				//document.getElementById('frostbolts').innerHTML = "";
+			}
+		}
+	}else if (y===2){
+			document.getElementById('enemies').innerHTML = "";
+		 	for (let i = 0; i < enemies.length; i++) {
+				// let ranDistance = Math.floor(Math.random() * 10) - 5; //random integer -5 to 5
+				//  enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
 
+				 enemies[i].top = enemies[i].top + 2;
+				 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
+				 if (enemies[i].left < 0) {enemies[i].left = 0;}
+				 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
+				 document.getElementById('enemies').innerHTML += 
+				 `<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+
+			}
+			//remove all the enemies that are flagged for removal
+			for (let i = 0; i < enemies.length; i++){
+				if (enemies[i].top === -100){
+					enemies.splice(i, 1);
+					i--;
+					clearScreen();
+					alert('Game over. You have been overwhelmed!');
+					$('button').css('visibility', 'visible')
+				
+				}
+
+			}
+	}else if (y===3){
+			document.getElementById('enemies').innerHTML = "";
+		 	 for (let i = 0; i < enemies.length; i++) {
+				let ranDistance = Math.floor(Math.random() * 20) - 10; //random integer -5 to 5
+				 enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
+
+				 enemies[i].top = enemies[i].top + 1;
+				 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
+				 if (enemies[i].left < 0) {enemies[i].left = 0;}
+				 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
+				 document.getElementById('enemies').innerHTML += 
+				 `<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+			}
+			//remove all the enemies that are flagged for removal
+			for (let i = 0; i < enemies.length; i++){
+				if (enemies[i].top === -100){
+					enemies.splice(i, 1);
+					i--;
+					clearScreen();
+					alert('Game over. You have been overwhelmed!');
+					$('button').css('visibility', 'visible')
+				
+				}
+
+			}
+		}else if (y===4){
+			document.getElementById('enemies').innerHTML = "";
+		 	for (let i = 0; i < enemies.length; i++) {
+				let ranDistance = Math.floor(Math.random() * 20) - 10; //random integer -5 to 5
+				 enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
+
+				 enemies[i].top = enemies[i].top + 2;
+				 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
+				 if (enemies[i].left < 0) {enemies[i].left = 0;}
+				 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
+				 document.getElementById('enemies').innerHTML += 
+				 `<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+
+			}
+			//remove all the enemies that are flagged for removal
+			for (let i = 0; i < enemies.length; i++){
+				if (enemies[i].top === -100){
+					enemies.splice(i, 1);
+					i--;
+					clearScreen();
+					alert('Game over. You have been overwhelmed!');
+					$('button').css('visibility', 'visible')
+				
+				}
+
+			}
+		}else if (y===5){
+			
+					clearScreen();
+					alert('YOU HAVE VANQUISHED THE ENEMY SCOUT FORCES! YOUR ARMY HAS ARRIVED TO REINFORCE THE CHOKE POINT BEFORE THE GOBLIN ARMY. PURCHASE EXPANTION PACK FOR NEW SPELLS AND ENEMIES!');
+					$('button').css('visibility', 'visible')
+				
+		}
 }
 
 function clearScreen () {
@@ -206,6 +312,8 @@ function clearScreen () {
 	}
 	for (let frost = 0; frost < frostbolts.length;) {
     	frostbolts.pop();}
+    i = 20;
+    y = 1;
 
 }
 
@@ -227,7 +335,7 @@ function drawFrostbolts() {
 	for (var frostbolt = 0; frostbolt < frostbolts.length; frostbolt = frostbolt + 1) { 
         //set up loop to create frostbolts
 		document.getElementById('frostbolts').innerHTML += 
-		`<div class='frostbolt' style='left:${frostbolts[frostbolt].left}px; top:${frostbolts[frostbolt].top}px'></div>`;
+		`<div class='frostbolt' style='left:${frostbolts[frostbolt].left - 6}px; top:${frostbolts[frostbolt].top -20}px'></div>`;
 	}
 
 }
@@ -236,7 +344,7 @@ function moveFrostbolts() {
 	for (let frostbolt = 0; frostbolt < frostbolts.length; frostbolt = frostbolt + 1)
 	{
 		frostbolts[frostbolt].top = frostbolts[frostbolt].top - 5
-		if (frostbolts[frostbolt].top < 80) {
+		if (frostbolts[frostbolt].top < 97) {
 			frostbolts.splice(frostbolt, 1);
 		}
 	}
@@ -247,8 +355,8 @@ function collisionDet() {		//for loop in a for loop
 		for (let frostbolt = 0; frostbolt < frostbolts.length; frostbolt++){
 			if (
 				(frostbolts[frostbolt].top <= enemies[enemy].top + 50) &&	 
-				(frostbolts[frostbolt].top >= enemies[enemy].top - 50) &&
-				(frostbolts[frostbolt].left >= enemies[enemy].left - 50) &&
+				(frostbolts[frostbolt].top >= enemies[enemy].top - 20) &&
+				(frostbolts[frostbolt].left >= enemies[enemy].left - 16) &&
 				(frostbolts[frostbolt].left <= enemies[enemy].left + 50)
 
 				){

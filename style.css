@@ -1,17 +1,19 @@
 #background {
-	background-image: url('https://i.imgur.com/gf2pxj6.jpg');
+	background-image: url('Images/SpellplayBackgorund.jpg');
 	height: 800px;
 	width: 1200px;
+	border: 15px solid black;
+	border-radius: 10px;
 }
 
-#hero {
-	background-image: url('https://i.imgur.com/xlpXrA4.png?2');
-		height: 50px;
-		width: 50px;
-		position: absolute;
-		top: 800px;
-		left: 500px;
 
+#hero {
+		background-image: url('Images/vivi2.png');
+		height: 78px;
+		width: 68px;
+		position: absolute;
+		top: 790px;
+		left: 500px;
 }
 
 #enemies {
@@ -32,12 +34,89 @@
 	width: 1200px;
 	position: absolute;
 
+
 }
 
 .frostbolt {
 	background-image: url('Images/Frostbolt.png');
-		height: 50px;  
-		width: 50px;
+		height: 67px;  
+		width: 20px;
 		position: absolute;
 
 }
+
+
+#timer {
+
+	top: 375px;
+	left: 562px;
+	position: absolute;
+	font-family: 'Rubik', sans-serif;
+	font-size: 110px;
+	font-color: rgb(13,13,13);opacity:0.7;
+	font-weight: bold;
+}
+
+#round{
+	top: 290px;
+	left: 560px;
+	position: absolute;
+	font-family: 'Rubik', sans-serif;
+	font-size: 30px;
+	font-color: rgb(13,13,13);opacity:0.7;
+	font-weight: bold;
+	font-style: underline;
+
+}
+
+body {
+	background-color: grey;
+}
+
+h1 {
+	font-family: 'Rubik', sans-serif;
+
+}
+
+
+/*#startGame {
+ display:inline-block;
+ padding:0.35em 1.2em;
+ border:0.1em solid #FFFFFF;
+ margin:0 0.3em 0.3em 0;
+ border-radius:0.12em;
+ box-sizing: border-box;
+ text-decoration:none;
+ font-family:'Roboto',sans-serif;
+ font-weight:300;
+ color:#FFFFFF;
+ text-align:center;
+ transition: all 0.2s;
+}*/
+
+/*button{
+ display:inline-block;
+ padding:0.35em 1.2em;
+ border:0.1em solid #FFFFFF;
+ margin:0 0.3em 0.3em 0;
+ border-radius:0.12em;
+ box-sizing: border-box;
+ font-family:'Roboto',sans-serif;*/
+/* font-weight:300;
+ color:#FFFFFF;
+ text-align:center;
+ transition: all 0.2s;*/
+/*}*/
+
+button {
+ background-color: blue;
+}
+
+
+
+
+
+
+
+
+
