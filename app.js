@@ -5,14 +5,13 @@
 
 //20 x 67
 
-//save imgaes into folder
-//movement tends to the left
-//round timers (each round enemies get tougher)
-//reset hero, reset clocks
-//clear keys after round
+
+//remove from dom after round over/win
+
+//reset hero position at end of everything - be it final victory, defeat, round over
+//reset hero image at loss or final victory
 
 
-//record shots made in relation to shots hit - 3 points for a kill -1 point for a cast
 
 
 let keys = [];
@@ -21,7 +20,7 @@ let allowshoot = true;
 
 let hero = {
 	top: 790,
-	left: 500
+	left: 590
 };
 
 let frostbolts = [];
@@ -36,6 +35,9 @@ let enemiesInterval = null;
 
 let i = 20;
 let y = 1;
+
+
+//make player choose character then start game
 
 $('button').on('click', () => {
 
@@ -68,6 +70,29 @@ $('button').on('click', () => {
 	}
 })
 
+$('#player1').on('click', () => {
+	console.log('its working');
+	$('#hero').html("<img src='Images/vivi2.png'>");
+});
+
+$('#player2').on('click', () => {
+	console.log('its working');
+	$('#hero').html("<img src='Images/whiteMage.png'>");
+	// $('.frostbolt').html("<img src='Images/tailLaser.png'>");
+});
+
+
+$('#player3').on('click', () => {
+	console.log('its working');
+	$('#hero').html("<img src='Images/elephantMage.png'>");
+
+
+});
+
+
+
+
+
 let roundTimerInterval;
 
 function setTimer(){
@@ -83,6 +108,9 @@ function setTimer(){
 		        	y++;
 		        	if (y===5) {
 		        		clearScreen();
+		        		//$('#hero').css('left', '580px');
+		        		$('#hero').css('background-image', '');
+		        		//$('#frostbolt').css('left', '580px');
 						alert('YOU HAVE VANQUISHED THE ENEMY SCOUT FORCES! YOUR ARMY HAS ARRIVED TO REINFORCE THE CHOKE POINT BEFORE THE GOBLIN ARMY. PURCHASE EXPANTION PACK FOR NEW SPELLS AND ENEMIES!');
 						$('button').css('visibility', 'visible')
 		        	} else
@@ -91,6 +119,7 @@ function setTimer(){
 			        	i = 20;
 			        	endKeyHandler();
 			        	startKeyHandler();
+			        	//$('#hero').css('left', '580px');
 			        	//clearInterval(roundTimerInterval);
 			        	for (let foes = 0; foes < enemies.length;) {
 							enemies.pop();}
@@ -129,16 +158,16 @@ checkKeys = () => {
 
 	if (keys["ArrowLeft"])
 	{	
-		if (hero.left > 0) {
+		if (hero.left > 20) {
 		//console.log('left');
-		hero.left = hero.left - 10;
+		hero.left = hero.left - 8;
 		moveHero();
 	}
 	}
 	else if (keys["ArrowRight"])
 	{	if (hero.left < 1150) {
 		//console.log('right');
-		hero.left = hero.left + 10;
+		hero.left = hero.left + 8;
 		moveHero();
 	}
 	}
@@ -146,7 +175,7 @@ checkKeys = () => {
 	{
 		//console.log('spellcast');
 		frostbolts.push({
-			left: hero.left + 15,
+			left: hero.left + 23,
 			top: hero.top 
 		})
 		//drawFrostbolts()
@@ -210,7 +239,10 @@ function drawEnemies() {
 				enemies.splice(i, 1);
 				i--;
 				clearScreen();
-				alert('Game over. You have been overwhelmed!');
+				//$('#hero').css('display', 'none');
+				//$('#hero').css('left', '580px');
+				//$('.frostbolt').css('left', '580px'); //DEATHRESET
+				alert('Game over. You have been overwhelmed! Choose another Spellcaster!');
 				$('button').css('visibility', 'visible')
 				
 				
@@ -223,7 +255,7 @@ function drawEnemies() {
 				// let ranDistance = Math.floor(Math.random() * 10) - 5; //random integer -5 to 5
 				//  enemies[i].left = enemies[i].left + ranDistance;  //randomize .left
 
-				 enemies[i].top = enemies[i].top + 2;
+				 enemies[i].top = enemies[i].top + 1.5;
 				 if (enemies[i].top > 800) {enemies[i].top = -100;}  //pushes them to top so you can remove them
 				 if (enemies[i].left < 0) {enemies[i].left = 0;}
 				 if (enemies[i].left > 1150) {enemies[i].left = 1150;}
@@ -237,6 +269,7 @@ function drawEnemies() {
 					enemies.splice(i, 1);
 					i--;
 					clearScreen();
+					//$('#hero').css('left', '580px');
 					alert('Game over. You have been overwhelmed!');
 					$('button').css('visibility', 'visible')
 				
@@ -262,6 +295,7 @@ function drawEnemies() {
 					enemies.splice(i, 1);
 					i--;
 					clearScreen();
+					$('#hero').css('left', '580px');
 					alert('Game over. You have been overwhelmed!');
 					$('button').css('visibility', 'visible')
 				
@@ -288,6 +322,7 @@ function drawEnemies() {
 					enemies.splice(i, 1);
 					i--;
 					clearScreen();
+					//$('#hero').css('left', '580px');
 					alert('Game over. You have been overwhelmed!');
 					$('button').css('visibility', 'visible')
 				
@@ -297,6 +332,7 @@ function drawEnemies() {
 		}else if (y===5){
 			
 					clearScreen();
+					//$('#hero').css('left', '580px');
 					alert('YOU HAVE VANQUISHED THE ENEMY SCOUT FORCES! YOUR ARMY HAS ARRIVED TO REINFORCE THE CHOKE POINT BEFORE THE GOBLIN ARMY. PURCHASE EXPANTION PACK FOR NEW SPELLS AND ENEMIES!');
 					$('button').css('visibility', 'visible')
 				
@@ -321,7 +357,7 @@ function spawnNewEnemy () {
 	enemies.push(
 	{
 		top: 100,
-		left: Math.floor(Math.random() * 1200)
+		left: 12 + Math.floor(Math.random() * 1200)
 	});
 	//console.log("New enemy added");
 }

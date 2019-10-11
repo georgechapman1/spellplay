@@ -4,16 +4,19 @@
 	width: 1200px;
 	border: 15px solid black;
 	border-radius: 10px;
+	display: inline-block;
 }
 
 
+
+
 #hero {
-		background-image: url('Images/vivi2.png');
+		/*background-image: url('Images/vivi2.png');*/
 		height: 78px;
 		width: 68px;
 		position: absolute;
 		top: 790px;
-		left: 500px;
+		left: 590px;
 }
 
 #enemies {
@@ -49,7 +52,7 @@
 #timer {
 
 	top: 375px;
-	left: 562px;
+	left: 570px;
 	position: absolute;
 	font-family: 'Rubik', sans-serif;
 	font-size: 110px;
@@ -58,8 +61,8 @@
 }
 
 #round{
-	top: 290px;
-	left: 560px;
+	top: 315px;
+	left: 570px;
 	position: absolute;
 	font-family: 'Rubik', sans-serif;
 	font-size: 30px;
@@ -71,22 +74,81 @@
 
 body {
 	background-image: url('Images/Galaxy.jpg');
+/*	background: black;*/
 }
 
 h1 {
 	font-family: 'Rubik', sans-serif;
-	font-color: white;
+	color: white;
+	position: absolute;
+	left: 550px;
+	background: black;
+	border: 15px solid black;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 
 }
 
 
 button {
- background-color: blue;
+	background-color: grey;
+/*	margin-left: 550px;*/
+	border-radius: 12px;
+	padding: 250px 17px;
+	font-size: 25px;
+	display: block;
+/*	margin-bottom: 200px;*/
+	margin: 0 auto;
+	border: 10px solid black;
+	border-radius: 10px;
+	top: 360px;
+	position: absolute;
+	font-family: 'Rubik', sans-serif;
+}
+
+#chooseChar {
+	display: inline-block;
+
 }
 
 
+#chooseSpell {
+	border-radius: 5px;
+	padding: 14px 10px;
+	font-size: 24px;
+	font-weight: bold;
+	display: block;
+	font-family: 'Rubik', sans-serif;
+	color: white;
+	margin: 0 auto 10px auto;
+	position:absolute;
+	top: 90px;
+	background: black;
 
+}
 
+#player1, #player2, #player3 {
+	border: 10px solid black;
+	border-radius: 10px;
+	margin: 0 auto 650px auto;
+
+}
+
+#rules {
+	font-size: 24px;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color: white;
+	background: black;
+	left: 120px;
+	/*position:absolute;*/
+	border: 15px solid black;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	margin: -10px 0px 0px 0px;
+	width: 1200px;
+
+}
 
 
 
